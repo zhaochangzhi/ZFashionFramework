@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.fashion.mapper.DicMapper">
+
+	<!-- 字典列表 -->
+	<select id="selectDicList" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT DISTINCT type FROM zf_dic WHERE status = 'ENABLE'
+	</select>
+	
+	<!-- 字典内容列表 -->
+	<select id="selectDic" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT id, code, value FROM zf_dic
+		WHERE type = #{type} AND status = #{status}
+		ORDER BY id DESC
+	</select>
+	
+	<insert id="insertDic" parameterType="org.ZfashionFramework.common.model.DicModel">
+		INSERT INTO zf_dic(code, value, type) VALUES(#{code}, #{value}, #{type})
+	</insert>
+	
+</mapper>
